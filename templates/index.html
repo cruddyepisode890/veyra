@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="VEYRA AI — A personalized AI voice assistant with speaker authentication, noise suppression, speech recognition, NLP, and text-to-speech." />
+  <title>VEYRA</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- ═══════════ HEADER ═══════════ -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="header-logo">🛡️</div>
+        <div>
+          <div class="header-title">VEYRA</div>
+          <div class="header-subtitle">Personalized Voice Assistant</div>
+        </div>
+      </div>
+      <div class="header-status">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">System Ready</span>
+      </div>
+    </header>
+
+    <!-- ═══════════ MAIN GRID ═══════════ -->
+    <div class="main-grid">
+
+      <!-- ─── Sidebar ─── -->
+      <aside class="sidebar">
+
+        <!-- Voice Profile -->
+        <div class="card">
+          <div class="card-label"><span class="icon">🔐</span> Voice Profile</div>
+          <div class="profile-status">
+            <div class="profile-ring not-enrolled">
+              <span class="profile-icon">🔒</span>
+            </div>
+            <div class="profile-label">Not Enrolled</div>
+            <div class="profile-detail">Record your voice to get started.</div>
+            <button class="btn btn-primary btn-sm btn-block" id="btn-enroll">🎤 Enroll Voice</button>
+            <button class="btn btn-danger btn-sm btn-block" id="btn-delete-profile" style="display:none;">🗑️ Delete
+              Profile</button>
+          </div>
+        </div>
+
+        <!-- AI Pipeline -->
+        <div class="card">
+          <div class="card-label"><span class="icon">⚙️</span> AI Pipeline</div>
+          <div class="pipeline-steps">
+            <div class="pipeline-step" id="pipeline-step-1">
+              <span class="step-num">1</span>
+              <span class="step-label">Noise Suppression</span>
+              <span class="step-status">—</span>
+            </div>
+            <div class="pipeline-step" id="pipeline-step-2">
+              <span class="step-num">2</span>
+              <span class="step-label">Speaker Auth</span>
+              <span class="step-status">—</span>
+            </div>
+            <div class="pipeline-step" id="pipeline-step-3">
+              <span class="step-num">3</span>
+              <span class="step-label">Speech-to-Text</span>
+              <span class="step-status">—</span>
+            </div>
+            <div class="pipeline-step" id="pipeline-step-4">
+              <span class="step-num">4</span>
+              <span class="step-label">NLP / Intent</span>
+              <span class="step-status">—</span>
+            </div>
+            <div class="pipeline-step" id="pipeline-step-5">
+              <span class="step-num">5</span>
+              <span class="step-label">Text-to-Speech</span>
+              <span class="step-status">—</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ─── Main Panel ─── -->
+      <main class="main-panel">
+
+        <!-- Microphone Zone -->
+        <div class="card mic-zone">
+          <div class="card-label"><span class="icon">🎙️</span> Voice Command</div>
+
+          <div class="mic-btn-wrap">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <button class="mic-btn" id="mic-btn" disabled>🎤</button>
+          </div>
+
+          <span class="mic-label">Enroll your voice first</span>
+          <span class="mic-timer mono">00:00</span>
+
+          <!-- Waveform visualization bars -->
+          <div class="waveform-container">
+            <!-- 40 bars -->
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+
+        <!-- Transcript -->
+        <div class="transcript-text"></div>
+
+        <!-- Response -->
+        <div class="card response-card">
+          <div class="card-label"><span class="icon">💬</span> Assistant Response</div>
+          <div class="response-text"></div>
+          <div class="response-meta"></div>
+          <div class="response-audio"></div>
+        </div>
+
+        <!-- Access Denied Banner -->
+        <div class="denied-banner">
+          <div class="denied-icon">🚫</div>
+          <div class="denied-title">Access Denied</div>
+          <div class="denied-detail">Voice not recognized. Only the authorized user can interact with this assistant.
+          </div>
+          <div class="denied-sim"></div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="card">
+          <div class="card-label"><span class="icon">📋</span> Activity Log</div>
+          <div class="log-container"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ═══════════ ENROLLMENT MODAL ═══════════ -->
+  <div class="modal-overlay" id="enroll-modal">
+    <div class="modal" style="position:relative;">
+      <button class="modal-close" id="modal-close-btn">✕</button>
+      <div class="modal-title">🎤 Voice Enrollment</div>
+      <div class="modal-subtitle">
+        Record 5 voice samples to create your unique voice profile.<br />
+        Speak clearly and naturally for at least 2 seconds each.
+      </div>
+
+      <!-- Progress dots -->
+      <div class="enroll-progress">
+        <div class="enroll-dot current"></div>
+        <div class="enroll-dot"></div>
+        <div class="enroll-dot"></div>
+        <div class="enroll-dot"></div>
+        <div class="enroll-dot"></div>
+      </div>
+
+      <div class="enroll-prompt">Say: "Hello, my name is, and I am the authorized user."</div>
+      <div class="enroll-instruction">Sample 1 of 5</div>
+
+      <div class="enroll-actions">
+        <button class="enroll-mic-btn" id="enroll-mic-btn">🎤</button>
+      </div>
+
+      <div class="enroll-status-msg"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PROCESSING SPINNER ═══════════ -->
+  <div class="spinner-overlay">
+    <div class="spinner-content">
+      <div class="spinner"></div>
+      <div class="spinner-text">Processing …</div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+
+</html>
